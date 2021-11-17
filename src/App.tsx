@@ -43,7 +43,6 @@ const App = () => {
     if (!gameOver) {
       // users answer
       const answer = e.currentTarget.value;
-      setAnswer(answer);
       // Check answer against correct answer
       const correct = questions[number].correct_answer === answer;
       // Add score if answer is correct
@@ -55,6 +54,7 @@ const App = () => {
         correct,
         correctAnswer: questions[number].correct_answer,
       };
+      setAnswer(AnswerObject.correctAnswer);
       setUserAnswers((prev) => [...prev, AnswerObject]);
     }
   };
@@ -95,7 +95,7 @@ const App = () => {
         <button className="next" onClick={nextQuestion}>
           Next Question
         </button>
-        <p> My Answer : {answer}</p>
+        <p> Correct Answer : {answer}</p>
       </div>
     ) : null
     }
