@@ -18,6 +18,7 @@ const App = () => {
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
+  const [answer, setAnswer] = useState('');
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
@@ -32,6 +33,7 @@ const App = () => {
 
     setQuestions(newQuestions);
     setScore(0);
+    setAnswer('');
     setUserAnswers([]);
     setNumber(0);
     setLoading(false);
@@ -41,6 +43,7 @@ const App = () => {
     if (!gameOver) {
       // users answer
       const answer = e.currentTarget.value;
+      setAnswer(answer);
       // Check answer against correct answer
       const correct = questions[number].correct_answer === answer;
       // Add score if answer is correct
@@ -88,9 +91,12 @@ const App = () => {
       />
     )}
     {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1? (
-      <button className="next" onClick={nextQuestion}>
-        Next Question
-      </button>
+      <div>
+        <button className="next" onClick={nextQuestion}>
+          Next Question
+        </button>
+        <p> My Answer : {answer}</p>
+      </div>
     ) : null
     }
   </div>
